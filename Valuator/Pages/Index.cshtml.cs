@@ -21,27 +21,33 @@ public class IndexModel : PageModel
 
     public IActionResult OnPost(string text)
     {
-        if (string.IsNullOrEmpty(text)) Redirect("/");
-        _logger.LogDebug(text);
+        if (string.IsNullOrEmpty(text))
+        {
+            return Redirect("index");
+        }
+        else
+        {
+            _logger.LogDebug(text);
 
-        string id = Guid.NewGuid().ToString();
+            string id = Guid.NewGuid().ToString();
 
-        string similarityKey = "SIMILARITY-" + id;
-        //TODO: посчитать similarity и сохранить в БД по ключу similarityKey
-        _redis.Put(similarityKey, getSimilarity(text));
+            string similarityKey = "SIMILARITY-" + id;
+            //TODO: посчитать similarity и сохранить в БД по ключу similarityKey
+            _redis.Put(similarityKey, getSimilarity(text));
 
-        string textKey = "TEXT-" + id;
-        //TODO: сохранить в БД text по ключу textKey
-        _redis.Put(textKey, text);
+            string textKey = "TEXT-" + id;
+            //TODO: сохранить в БД text по ключу textKey
+            _redis.Put(textKey, text);
 
-        string rankKey = "RANK-" + id;
-        //TODO: посчитать rank и сохранить в БД по ключу rankKey
+            string rankKey = "RANK-" + id;
+            //TODO: посчитать rank и сохранить в БД по ключу rankKey
 
-        _redis.Put(rankKey, getRank(text));
+            _redis.Put(rankKey, getRank(text));
 
 
 
-        return Redirect($"summary?id={id}");
+            return Redirect($"summary?id={id}");
+        }
     }
 
     private string getSimilarity(string text)
