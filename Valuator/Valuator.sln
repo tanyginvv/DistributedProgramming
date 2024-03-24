@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Valuator", "Valuator.csproj", "{350B6AC6-E9B3-413B-9858-D7C953B54306}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RankCalculator", "..\RankCalculator\RankCalculator.csproj", "{2DADE88F-C872-4F0D-B192-7FE271D7B469}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{350B6AC6-E9B3-413B-9858-D7C953B54306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{350B6AC6-E9B3-413B-9858-D7C953B54306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{350B6AC6-E9B3-413B-9858-D7C953B54306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DADE88F-C872-4F0D-B192-7FE271D7B469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DADE88F-C872-4F0D-B192-7FE271D7B469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DADE88F-C872-4F0D-B192-7FE271D7B469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DADE88F-C872-4F0D-B192-7FE271D7B469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

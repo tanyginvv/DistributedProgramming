@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NATS.Client;
+using System.Text;
 
 namespace Valuator.Pages;
 
@@ -39,12 +41,19 @@ public class IndexModel : PageModel
             //TODO: сохранить в БД text по ключу textKey
             _redis.Put(textKey, text);
 
-            string rankKey = "RANK-" + id;
             //TODO: посчитать rank и сохранить в БД по ключу rankKey
 
-            _redis.Put(rankKey, getRank(text));
+            ConnectionFactory connectionFactory = new ConnectionFactory();
 
+            using(IConnection c = connectionFactory.CreateConnection())
+            {
+                byte[] data = Encoding.UTF8.GetBytes(id);
+                c.Publish("valuator.processing.rank", data);
 
+                c.Drain();
+
+                c.Close();
+            }
 
             return Redirect($"summary?id={id}");
         }
@@ -64,22 +73,5 @@ public class IndexModel : PageModel
         }
 
         return "0";
-    }
-
-
-    private string getRank(string text)
-    {
-        double all = text.Length;
-        double nonAlphabetic = 0;
-
-        foreach (char word in text)
-        {
-            if (!char.IsLetter(word))
-            {
-                nonAlphabetic++;
-            }
-        }
-
-        return (nonAlphabetic / all).ToString();
     }
 }
